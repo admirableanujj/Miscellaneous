@@ -11,7 +11,7 @@ public class Test {
 		ArrayList<InputData> inputDataGiven = new ArrayList<InputData>();
 		try {
 
-			inputDataGiven = Test.csvFileRead("src/itcont.txt");
+			inputDataGiven = Test.csvFileRead("insight_testsuite/tests/test_1/input/itcont.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,9 +49,9 @@ public class Test {
 		return dataGiven;
 
 	}
-	public static boolean csvFileWrite(ArrayList<OutPut> outPutData) throws IOException {
+	public static boolean csvFileWrite(ArrayList<OutPut> outPutData) throws IOException {	
         try {
-            FileWriter writer = new FileWriter("src/top_cost_drug.txt", true);
+            FileWriter writer = new FileWriter("insight_testsuite/tests/test_1/output/top_cost_drug.txt", true);
     		for (OutPut outPut : outPutData) {
     			writer.write(outPut.getDrug_name() + "," + outPut.getNum_prescriber() + "," + outPut.getTotalCost());
     			writer.write("\r\n");   // write new line
