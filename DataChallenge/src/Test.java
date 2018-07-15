@@ -105,3 +105,111 @@ public class Test {
 	}
 
 }
+ class InputData {
+
+	String id;
+	String prescriberLastName;
+	String prescriberFirstName;
+	String drugName;
+	double drugCost;
+	
+	
+	public InputData() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public InputData(String id, String prescriberLastName, String prescriberFirstName, String drugName,
+			double drugCost) {
+		super();
+		this.id = id;
+		this.prescriberLastName = prescriberLastName;
+		this.prescriberFirstName = prescriberFirstName;
+		this.drugName = drugName;
+		this.drugCost = drugCost;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getPrescriberLastName() {
+		return prescriberLastName;
+	}
+	public void setPrescriberLastName(String prescriberLastName) {
+		this.prescriberLastName = prescriberLastName;
+	}
+	public String getPrescriberFirstName() {
+		return prescriberFirstName;
+	}
+	public void setPrescriberFirstName(String prescriberFirstName) {
+		this.prescriberFirstName = prescriberFirstName;
+	}
+	public String getDrugName() {
+		return drugName;
+	}
+	public void setDrugName(String drugName) {
+		this.drugName = drugName;
+	}
+	public double getDrugCost() {
+		return drugCost;
+	}
+	public void setDrugCost(double drugCost) {
+		this.drugCost = drugCost;
+	}
+	
+	
+	
+	
+	
+}
+
+
+class OutPut implements Comparable<OutPut>{
+
+	String drug_name;
+	int num_prescriber;
+	double totalCost;
+	
+		
+	public OutPut() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public OutPut(String drug_name, int num_prescriber, double totalCost) {
+		super();
+		this.drug_name = drug_name;
+		this.num_prescriber = num_prescriber;
+		this.totalCost = totalCost;
+	}
+	
+	public String getDrug_name() {
+		return drug_name;
+	}
+	public void setDrug_name(String drug_name) {
+		this.drug_name = drug_name;
+	}
+	public int getNum_prescriber() {
+		return num_prescriber;
+	}
+	public void setNum_prescriber(int num_prescriber) {
+		this.num_prescriber = num_prescriber;
+	}
+	public double getTotalCost() {
+		return totalCost;
+	}
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+	
+	
+	public int compareTo(OutPut opt){  
+		if(totalCost==opt.totalCost)  
+		return 0;  
+		else if(totalCost<opt.totalCost)  
+		return 1;  
+		else  
+		return -1;  
+		}  
+}
