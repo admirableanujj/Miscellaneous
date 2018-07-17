@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,11 +9,17 @@ import java.util.Collections;
 public class Test {
 
 	public static void main(String[] args) {
-
+		//String currentDirectory;
+		//File file = new File(".");
+		//currentDirectory = file.getAbsolutePath();
+		//System.out.println("Current working directory : "+currentDirectory);
+		
+		if(i==0){String inputFileName = args[i];}else if(i==1){String outputFileName = args[i];}		
+		}		
 		ArrayList<InputData> inputDataGiven = new ArrayList<InputData>();
 		try {
 
-			inputDataGiven = Test.csvFileRead("./insight_testsuite/tests/test_1/input/itcont.txt");
+			inputDataGiven = Test.csvFileRead(inputFileName);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +70,7 @@ public class Test {
 
 	public static boolean csvFileWrite(ArrayList<OutPut> outPutData) throws IOException {
 		try {
-			FileWriter writer = new FileWriter("insight_testsuite/tests/test_1/output/top_cost_drug.txt", true);
+			FileWriter writer = new FileWriter(outputFileName, true);
 			for (OutPut outPut : outPutData) {
 				writer.write(outPut.getDrug_name() + "," + outPut.getNum_prescriber() + "," + outPut.getTotalCost());
 				writer.write("\r\n"); // write new line
