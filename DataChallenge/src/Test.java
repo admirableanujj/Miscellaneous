@@ -8,10 +8,11 @@ import java.util.Collections;
 public class Test {
 
 	public static void main(String[] args) {
+
 		ArrayList<InputData> inputDataGiven = new ArrayList<InputData>();
 		try {
 
-			inputDataGiven = Test.csvFileRead("insight_testsuite/tests/test_1/input/itcont.txt");
+			inputDataGiven = Test.csvFileRead("./insight_testsuite/tests/test_1/input/itcont.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -22,13 +23,17 @@ public class Test {
 		for (OutPut outPut : sortedData) {
 			System.out.println(outPut.getDrug_name() + "," + outPut.getNum_prescriber() + "," + outPut.getTotalCost());
 		}
-	try {
-		boolean success =	Test.csvFileWrite(sortedData);
-		if(success) {System.out.println("Success");}else {System.out.println("Not Success");}
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		try {
+			boolean success = Test.csvFileWrite(sortedData);
+			if (success) {
+				System.out.println("Success");
+			} else {
+				System.out.println("Not Success");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -36,11 +41,17 @@ public class Test {
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = null;
 		ArrayList<InputData> dataGiven = new ArrayList<InputData>();
+		boolean firstLine = true;
 		while ((line = br.readLine()) != null) {
+
 			String[] values = line.split(",");
-			InputData inputObject = new InputData(values[0], values[1], values[2], values[3],
-					Double.parseDouble(values[4]));
-			dataGiven.add(inputObject);
+			if (!firstLine) {
+				InputData inputObject = new InputData(values[0], values[1], values[2], values[3],
+						Double.parseDouble(values[4]));
+				dataGiven.add(inputObject);
+			} else {
+				firstLine = false;
+			}
 			// for (String str : values) {
 			// System.out.println(str);
 			// }
@@ -49,21 +60,23 @@ public class Test {
 		return dataGiven;
 
 	}
-	public static boolean csvFileWrite(ArrayList<OutPut> outPutData) throws IOException {	
-        try {
-            FileWriter writer = new FileWriter("insight_testsuite/tests/test_1/output/top_cost_drug.txt", true);
-    		for (OutPut outPut : outPutData) {
-    			writer.write(outPut.getDrug_name() + "," + outPut.getNum_prescriber() + "," + outPut.getTotalCost());
-    			writer.write("\r\n");   // write new line
-    		}
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-          return false;
-        }
- 
-    		return true;
+
+	public static boolean csvFileWrite(ArrayList<OutPut> outPutData) throws IOException {
+		try {
+			FileWriter writer = new FileWriter("insight_testsuite/tests/test_1/output/top_cost_drug.txt", true);
+			for (OutPut outPut : outPutData) {
+				writer.write(outPut.getDrug_name() + "," + outPut.getNum_prescriber() + "," + outPut.getTotalCost());
+				writer.write("\r\n"); // write new line
+			}
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
 	}
+
 	public static ArrayList<OutPut> sortAndRemoveDuplicate(ArrayList<InputData> inputDataGiven) {
 		ArrayList<OutPut> sortedData = new ArrayList<OutPut>();
 		ArrayList<String> drugName = new ArrayList<String>();
@@ -105,19 +118,20 @@ public class Test {
 	}
 
 }
- class InputData {
+
+class InputData {
 
 	String id;
 	String prescriberLastName;
 	String prescriberFirstName;
 	String drugName;
 	double drugCost;
-	
-	
+
 	public InputData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public InputData(String id, String prescriberLastName, String prescriberFirstName, String drugName,
 			double drugCost) {
 		super();
@@ -127,51 +141,55 @@ public class Test {
 		this.drugName = drugName;
 		this.drugCost = drugCost;
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getPrescriberLastName() {
 		return prescriberLastName;
 	}
+
 	public void setPrescriberLastName(String prescriberLastName) {
 		this.prescriberLastName = prescriberLastName;
 	}
+
 	public String getPrescriberFirstName() {
 		return prescriberFirstName;
 	}
+
 	public void setPrescriberFirstName(String prescriberFirstName) {
 		this.prescriberFirstName = prescriberFirstName;
 	}
+
 	public String getDrugName() {
 		return drugName;
 	}
+
 	public void setDrugName(String drugName) {
 		this.drugName = drugName;
 	}
+
 	public double getDrugCost() {
 		return drugCost;
 	}
+
 	public void setDrugCost(double drugCost) {
 		this.drugCost = drugCost;
 	}
-	
-	
-	
-	
-	
+
 }
 
-
-class OutPut implements Comparable<OutPut>{
+class OutPut implements Comparable<OutPut> {
 
 	String drug_name;
 	int num_prescriber;
 	double totalCost;
-	
-		
+
 	public OutPut() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -183,33 +201,37 @@ class OutPut implements Comparable<OutPut>{
 		this.num_prescriber = num_prescriber;
 		this.totalCost = totalCost;
 	}
-	
+
 	public String getDrug_name() {
 		return drug_name;
 	}
+
 	public void setDrug_name(String drug_name) {
 		this.drug_name = drug_name;
 	}
+
 	public int getNum_prescriber() {
 		return num_prescriber;
 	}
+
 	public void setNum_prescriber(int num_prescriber) {
 		this.num_prescriber = num_prescriber;
 	}
+
 	public double getTotalCost() {
 		return totalCost;
 	}
+
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
-	
-	
-	public int compareTo(OutPut opt){  
-		if(totalCost==opt.totalCost)  
-		return 0;  
-		else if(totalCost<opt.totalCost)  
-		return 1;  
-		else  
-		return -1;  
-		}  
+
+	public int compareTo(OutPut opt) {
+		if (totalCost == opt.totalCost)
+			return 0;
+		else if (totalCost < opt.totalCost)
+			return 1;
+		else
+			return -1;
+	}
 }
